@@ -66,7 +66,8 @@ public class AllocationService {
 
     private Allocation saveInternal(Allocation allocation) {
         if (!isEndHourGreaterThanStartHour(allocation) || hasCollision(allocation)) {
-            throw new RuntimeException();
+        	System.out.println("Entrei nessa merdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            throw new RuntimeException(" aiiiiiiiiiiiiiiii ");
         } else {
             allocation = allocationRepository.save(allocation);
 
@@ -85,7 +86,7 @@ public class AllocationService {
                 && allocation.getEndHour().compareTo(allocation.getStartHour()) > 0;
     }
 
-    boolean hasCollision(Allocation newAllocation) {
+    public boolean hasCollision(Allocation newAllocation) {
         boolean hasCollision = false;
 
         List<Allocation> currentAllocations = allocationRepository.findByProfessorId(newAllocation.getProfessorId());

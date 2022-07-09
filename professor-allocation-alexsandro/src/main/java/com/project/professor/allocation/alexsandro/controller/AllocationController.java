@@ -87,9 +87,14 @@ public class AllocationController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Allocation> save(@RequestBody Allocation allocation) {
         try {
+        	
             allocation = allocationService.save(allocation);
+            if(allocationService.hasCollision(allocation)) {
+            	return new ResponseEntity<>( HttpStatus.CONFLICT);
+            	}
             return new ResponseEntity<>(allocation, HttpStatus.CREATED);
         } catch (Exception e) {
+        	e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
